@@ -19,7 +19,7 @@ const rootDir = Path.resolve(__dirname);
 @ServerSettings({
 	rootDir,
 	mount: {
-		'/v1': `${rootDir}/controllers/**/**.controller.{ts,js}`
+		'/api/v1': `${rootDir}/controllers/**/**.controller.{ts,js}`
 	},
 	componentsScan: [
 		`${rootDir}/services/**/**.service.{ts,js}`,
