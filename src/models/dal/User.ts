@@ -27,6 +27,10 @@ export class User extends Typegoose {
 
 	@prop()
 	@JsonProperty()
+	picture: string;
+
+	@prop()
+	@JsonProperty()
 	get fullName() {
 		return `${this.firstName} ${this.lastName}`
 	}
