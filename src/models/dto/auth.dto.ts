@@ -1,10 +1,18 @@
 import { IsEmail, IsNotEmpty as Required, MinLength } from 'class-validator';
-import { JsonProperty } from "@tsed/common";
+import { JsonProperty } from '@tsed/common';
 import { prop } from 'typegoose';
 
+export enum AuthProviderEnum {
+    FACEBOOK = 'facebook'
+}
+
 export class AuthToken {
-    @prop() accessToken: string;
-    //@prop({ enum: AuthProviderEnum }) provider: AuthProviderEnum;
+    @prop() 
+    accessToken: string;
+    @prop({ 
+        enum: AuthProviderEnum 
+    })
+    provider: AuthProviderEnum;
 }
 
 export interface IAuthProviderProfileDto {
@@ -13,7 +21,7 @@ export interface IAuthProviderProfileDto {
     picture?: string;
     email: string;
     password?: string;
-    facebook?: string;
+    //facebook?: string;
     tokens?: AuthToken[];
 }
 
@@ -55,4 +63,38 @@ export class SignupDto {
     @JsonProperty()
     @Required()
     lastName: string;
+}
+
+export class UserDto {
+    @IsEmail()
+    @JsonProperty()
+    email: string;
+
+    @JsonProperty()
+    username?: string;
+
+    @JsonProperty()
+    firstName: string;
+
+    @JsonProperty()
+    lastName: string;
+
+    @JsonProperty()
+    secondLastName?: string;
+
+    @JsonProperty()
+    fullName?: string;
+
+    @JsonProperty()
+    picture?: string;
+}
+
+export class UsernameDto {
+	@JsonProperty()
+	username: string
+}
+
+export class EmailDto {
+	@JsonProperty()
+	email: string
 }

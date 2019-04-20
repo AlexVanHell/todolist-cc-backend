@@ -24,7 +24,7 @@ const rootDir = Path.resolve(__dirname);
 	componentsScan: [
 		`${rootDir}/services/**/**.service.{ts,js}`,
 		`${rootDir}/middlewares/**/**.{ts,js}`,
-		`${rootDir}/dal/**/**.{ts,js}`
+		`${rootDir}/models/dal/**/**.{ts,js}`
 	],
 	httpPort: process.env.PORT || 3000,
 	httpsPort: false,

@@ -1,7 +1,7 @@
 import { Typegoose, pre, prop, instanceMethod, InstanceType, ModelType } from 'typegoose'
-import { JsonProperty, InjectorService, Use, registerFactory } from '@tsed/common';
+import { JsonProperty, registerFactory } from '@tsed/common';
 import * as bcrypt from 'bcrypt-nodejs';
-import { UserRepositoryToken } from 'src/models/dal/token-constants';
+import { UserRepositoryToken } from './token-constants';
 
 @pre<User>('save', preSaveHook)
 export class User extends Typegoose {
@@ -20,6 +20,10 @@ export class User extends Typegoose {
 	@prop()
 	@JsonProperty()
 	lastName: string;
+
+	@prop({ unique: true })
+	@JsonProperty()
+	username: string;
 
 	@prop()
 	@JsonProperty()
