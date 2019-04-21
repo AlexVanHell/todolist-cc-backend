@@ -66,7 +66,9 @@ export class SignupDto {
 }
 
 export class UserDto {
-    @IsEmail()
+    @JsonProperty()
+    _id: string;
+
     @JsonProperty()
     email: string;
 

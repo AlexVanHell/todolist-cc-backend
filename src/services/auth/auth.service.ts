@@ -14,7 +14,7 @@ import { MongoErrorCode } from '../../types/mongo';
 
 @Service()
 export class AuthService {
-	private USER_TOKEN_FIELDS = '_id email username lastName firstName picture fullName';
+	private USER_TOKEN_FIELDS = '_id email username lastName secondLastName firstName fullName picture';
 
 	constructor(
 		@Inject(UserRepositoryToken) private userRepository: UserRepository

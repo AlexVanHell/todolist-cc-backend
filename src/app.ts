@@ -7,6 +7,7 @@ import * as logger from 'morgan';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
+import * as cors from 'cors';
 
 dotenv.config({ path: '.env' });
 
@@ -45,6 +46,7 @@ export class Server extends ServerLoader {
 			.use(compression())
 			.use(express())
 			.use(logger('dev'))
+			.use(cors())
 			.use(bodyParser.json())
 			.use(bodyParser.urlencoded({
 				extended: true

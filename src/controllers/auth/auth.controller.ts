@@ -8,9 +8,7 @@ import { AuthRequest } from '../../types/auth';
 import { UserInstance } from '../../models/dal/User';
 import { validateEmail } from '../../utils/helpers.service';
 import { ApiError } from '../../utils/error';
-import { API_ERRORS } from '../../types/app.errors';
 import { HTTPStatusCodes } from '../../types/http';
-import { $log } from 'ts-log-debug';
 
 @Controller('/auth')
 export class AuthController {
