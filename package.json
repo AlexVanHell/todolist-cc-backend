@@ -7,9 +7,9 @@
     "start": "./node_modules/.bin/nodemon",
     "prestart:prod": "npm run build",
     "start:prod": "NODE_ENV=production node dist/server.js",
-    "build": "tsc && npm run tslint",
-    "test": "jest --forceExit",
-    "tslint": "tslint -c tslint.json --project tsconfig.json",
+    "build": "./node_modules/.bin/tsc && npm run tslint",
+    "test": "./node_modules/.bin/jest --forceExit",
+    "tslint": "./node_modules/.bin/tslint -c tslint.json --project tsconfig.json",
     "path": "tspath"
   },
   "jest": {
