@@ -21,9 +21,6 @@ export class AuthController {
 	@Validate()
 	async login(
 		@Validator() @BodyParams() body: LoginDto,
-		@Request() req: any,
-		@Response() res,
-		@Next() next: NextFunction
 	): Promise<AuthDto> {
 		return await this.authService.authenticateLocal(body.email, body.password);
 	}
