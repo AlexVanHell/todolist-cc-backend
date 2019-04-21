@@ -5,7 +5,7 @@
 .env
 
 # Compiled source
-/dist
+#/dist
 
 # System Files
 .DS_Store
