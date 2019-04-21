@@ -14,9 +14,7 @@ import { HTTPStatusCodes } from '../../types/http';
 export class AuthController {
 	constructor(
 		private authService: AuthService
-	) {
-
-	}
+	) { }
 
 	@Post('/login')
 	@Returns(AuthDto)
@@ -39,7 +37,6 @@ export class AuthController {
 	): Promise<AuthDto> {
 		const user = await this.authService.createUser(body);
 		const authData = await this.authService.authenticateLocal(user.email, body.password);
-
 		return authData;
 	}
 
@@ -60,7 +57,7 @@ export class AuthController {
 		@QueryParams('name') name: string
 	): Promise<UsernameDto> {
 		const user: UserInstance = await this.authService.getUserByUsername(name, 'username');
-		return { username: user ? user.username : null };
+		return { username: user ? user.username : undefined };
 	}
 
 	@Get('/user/email')
@@ -72,8 +69,7 @@ export class AuthController {
 		if (!validateEmail(email)) {
 			throw new ApiError({ message: 'Invalid email' }, HTTPStatusCodes.BAD_REQUEST);
 		}
-		
 		const user: UserInstance = await this.authService.getUserByEmail(email, 'email');
-		return { email: user ? user.email : null };
+		return { email: user ? user.email : undefined };
 	}
 }

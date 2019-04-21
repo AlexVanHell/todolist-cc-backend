@@ -1,9 +1,9 @@
 import { API_ERRORS } from '../../types/app.errors';
 
 export interface ErrorPayload {
-    status?: number;
-    code?: number;
-    message: string;
+	status?: number;
+	code?: number;
+	message: string;
 }
 
 export class ApiError extends Error {

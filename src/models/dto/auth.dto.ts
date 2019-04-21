@@ -3,100 +3,100 @@ import { JsonProperty } from '@tsed/common';
 import { prop } from 'typegoose';
 
 export enum AuthProviderEnum {
-    FACEBOOK = 'facebook'
+	FACEBOOK = 'facebook'
 }
 
 export class AuthToken {
-    @prop() 
-    accessToken: string;
-    @prop({ 
-        enum: AuthProviderEnum 
-    })
-    provider: AuthProviderEnum;
+	@prop()
+	accessToken: string;
+	@prop({
+		enum: AuthProviderEnum
+	})
+	provider: AuthProviderEnum;
 }
 
 export interface IAuthProviderProfileDto {
-    firstName: string;
-    lastName: string;
-    picture?: string;
-    email: string;
-    password?: string;
-    //facebook?: string;
-    tokens?: AuthToken[];
+	firstName: string;
+	lastName: string;
+	picture?: string;
+	email: string;
+	password?: string;
+	// facebook?: string;
+	tokens?: AuthToken[];
 }
 
 export class AuthDto {
 	@JsonProperty()
-    token: string;
-    // Time to expiration specified in EPOC ms
-    @JsonProperty()
-    expires: string;
+	token: string;
+	// Time to expiration specified in EPOC ms
+	@JsonProperty()
+	expires: string;
 }
 
 export class LoginDto {
-    @JsonProperty()
-    @IsEmail()
-    @Required()
-    email: string;
+	@JsonProperty()
+	@IsEmail()
+	@Required()
+	email: string;
 
-    @JsonProperty()
-    @Required()
-    @MinLength(6)
-    password: string;
+	@JsonProperty()
+	@Required()
+	@MinLength(6)
+	password: string;
 }
 
 export class SignupDto {
-    @IsEmail()
-    @Required()
-    @JsonProperty()
-    email: string;
+	@IsEmail()
+	@Required()
+	@JsonProperty()
+	email: string;
 
-    @JsonProperty()
-    @Required()
-    @MinLength(6)
-    password: string;
+	@JsonProperty()
+	@Required()
+	@MinLength(6)
+	password: string;
 
-    @JsonProperty()
-    @Required()
-    firstName: string;
+	@JsonProperty()
+	@Required()
+	firstName: string;
 
-    @JsonProperty()
-    @Required()
-    lastName: string;
+	@JsonProperty()
+	@Required()
+	lastName: string;
 }
 
 export class UserDto {
-    @JsonProperty()
-    _id: string;
+	@JsonProperty()
+	_id: string;
 
-    @JsonProperty()
-    email: string;
+	@JsonProperty()
+	email: string;
 
-    @JsonProperty()
-    username?: string;
+	@JsonProperty()
+	username?: string;
 
-    @JsonProperty()
-    firstName: string;
+	@JsonProperty()
+	firstName: string;
 
-    @JsonProperty()
-    lastName: string;
+	@JsonProperty()
+	lastName: string;
 
-    @JsonProperty()
-    secondLastName?: string;
+	@JsonProperty()
+	secondLastName?: string;
 
-    @JsonProperty()
-    fullName?: string;
+	@JsonProperty()
+	fullName?: string;
 
-    @JsonProperty()
-    picture?: string;
+	@JsonProperty()
+	picture?: string;
 }
 
 export class UsernameDto {
 	@JsonProperty()
-	username: string
+	username: string;
 }
 
 export class EmailDto {
 	@JsonProperty()
-	email: string
+	email: string;
 }

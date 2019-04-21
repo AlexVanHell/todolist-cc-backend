@@ -1,5 +1,12 @@
 # Project dependencies
-**/node_modules/**
+/node_modules
 
 # Environment settings
-**/.env
+.env
+
+# Compiled source
+/dist
+
+# System Files
+.DS_Store
+Thumbs.db

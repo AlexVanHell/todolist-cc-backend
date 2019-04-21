@@ -1,3 +1,3 @@
 export enum MongoErrorCode {
-    DUPLICATE_KEY = 11000
+	DUPLICATE_KEY = 11000
 }

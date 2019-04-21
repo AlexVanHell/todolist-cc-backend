@@ -52,7 +52,7 @@ export class Server extends ServerLoader {
 				extended: true
 			}));
 
-		return null;
+		return undefined;
 	}
 
 	async $onInit(): Promise<any> {

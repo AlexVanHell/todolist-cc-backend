@@ -5,20 +5,20 @@ import { Service } from '@tsed/di';
 
 @Service()
 export class MongooseService {
-    static resource: mongoose.Connection;
+	static resource: mongoose.Connection;
 
-    static async connect(): Promise<mongoose.Connection> {
-        const mongoUrl = process.env.MONGODB_URI;
+	static async connect(): Promise<mongoose.Connection> {
+		const mongoUrl = process.env.MONGODB_URI;
 
-        if (MongooseService.resource) {
-            return MongooseService.resource;
-        }
+		if (MongooseService.resource) {
+			return MongooseService.resource;
+		}
 
-        const db: mongoose.Connection = <any>await mongoose.connect(mongoUrl, {
-            useMongoClient: true
-        });
+		const db: mongoose.Connection = <any>await mongoose.connect(mongoUrl, {
+			useMongoClient: true
+		});
 
-        MongooseService.resource = db;
-        return db;
-    }
+		MongooseService.resource = db;
+		return db;
+	}
 }

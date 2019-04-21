@@ -1,16 +1,16 @@
+import { Inject, Service } from '@tsed/di';
 import * as jwt from 'jsonwebtoken';
 import * as moment from 'moment';
-
-import { Service, Inject } from '@tsed/di';
+import { TOKEN_EXP } from '../../constants';
 import { UserRepositoryToken } from '../../models/dal/token-constants';
-import { UserRepository, UserInstance } from '../../models/dal/User';
+import { UserInstance, UserRepository } from '../../models/dal/User';
 import { AuthDto, IAuthProviderProfileDto } from '../../models/dto/auth.dto';
-import { validateEmail } from '../../utils/helpers.service';
-import { ApiError } from '../../utils/error';
 import { API_ERRORS } from '../../types/app.errors';
 import { HTTPStatusCodes } from '../../types/http';
-import { TOKEN_EXP } from '../../constants';
 import { MongoErrorCode } from '../../types/mongo';
+import { ApiError } from '../../utils/error';
+import { validateEmail } from '../../utils/helpers.service';
+
 
 @Service()
 export class AuthService {
@@ -21,16 +21,16 @@ export class AuthService {
 	) { }
 
 	/**
-     * Used to fetch user based on its id.
-     *
-     * There are multiple approaches with working with jwt,
-     * You can skip the hydration process and use only the jwt token as the user data.
-     * But if you need to invalidate user token dynamically a db/redis query should be made.
-     *
-     * @param {string} id
+	 * Used to fetch user based on its id.
+	 *
+	 * There are multiple approaches with working with jwt,
+	 * You can skip the hydration process and use only the jwt token as the user data.
+	 * But if you need to invalidate user token dynamically a db/redis query should be made.
+	 *
+	 * @param {string} id
 	 * @param {string} tokenFields Override default selected fields
-     * @returns {Promise<UserInstance>}
-     */
+	 * @returns {Promise<UserInstance>}
+	 */
 	async rehydrateUser(id: string, tokenFields?: string): Promise<UserInstance> {
 		const user: UserInstance = await this.userRepository.findById(id, tokenFields || this.USER_TOKEN_FIELDS);
 		if (!user) return;
@@ -40,8 +40,8 @@ export class AuthService {
 
 	/**
 	 * Get user by provided id
-	 * @param id 
-	 * @param tokenFields 
+	 * @param id
+	 * @param tokenFields
 	 */
 	async getUserById(id: string, tokenFields?: string): Promise<UserInstance> {
 		const user: UserInstance = await this.userRepository.findById(id, tokenFields || this.USER_TOKEN_FIELDS);
@@ -52,8 +52,8 @@ export class AuthService {
 
 	/**
 	 * Get user by provided id
-	 * @param id 
-	 * @param tokenFields 
+	 * @param id
+	 * @param tokenFields
 	 */
 	async getUserByEmail(email: string, tokenFields?: string): Promise<UserInstance> {
 		const user: UserInstance = await this.userRepository.findOne({ email }, tokenFields || this.USER_TOKEN_FIELDS);
@@ -64,8 +64,8 @@ export class AuthService {
 
 	/**
 	 * Get user by provided id
-	 * @param id 
-	 * @param tokenFields 
+	 * @param id
+	 * @param tokenFields
 	 */
 	async getUserByUsername(name: string, tokenFields?: string): Promise<UserInstance> {
 		const user: UserInstance = await this.userRepository.findOne({ username: name }, tokenFields || this.USER_TOKEN_FIELDS);
@@ -76,7 +76,7 @@ export class AuthService {
 
 	/**
 	 * Create new user in database
-	 * @param profile 
+	 * @param profile
 	 */
 	async createUser(profile: IAuthProviderProfileDto): Promise<UserInstance> {
 		this.validateProfile(profile);
@@ -88,15 +88,15 @@ export class AuthService {
 		try {
 			return await user.save();
 		} catch (e) {
-			if (e.code === MongoErrorCode.DUPLICATE_KEY) throw new ApiError(API_ERRORS.USER_ALREADY_EXISTS)
+			if (e.code === MongoErrorCode.DUPLICATE_KEY) throw new ApiError(API_ERRORS.USER_ALREADY_EXISTS);
 
-			throw new ApiError(API_ERRORS.GENERAL_ERROR)
+			throw new ApiError(API_ERRORS.GENERAL_ERROR);
 		}
 	}
 
 	/**
 	 * Validate profile information
-	 * @param profile 
+	 * @param profile
 	 */
 	private validateProfile(profile: IAuthProviderProfileDto) {
 		if (!profile.email) throw new ApiError({ message: 'Missing email field' }, HTTPStatusCodes.BAD_REQUEST);
@@ -108,7 +108,7 @@ export class AuthService {
 
 	/**
 	 * Validate token with jwt
-	 * @param token 
+	 * @param token
 	 */
 	async validateToken(token: string) {
 		try {
@@ -116,9 +116,9 @@ export class AuthService {
 
 			return await this.rehydrateUser((<object>payload)['_id']);
 		} catch (err) {
-			if (err.name === 'TokenExpiredError') throw new ApiError(API_ERRORS.EXPIRED_TOKEN)
+			if (err.name === 'TokenExpiredError') throw new ApiError(API_ERRORS.EXPIRED_TOKEN);
 
-			throw new ApiError(API_ERRORS.UNAUTHORIZED)
+			throw new ApiError(API_ERRORS.UNAUTHORIZED);
 		}
 	}
 
