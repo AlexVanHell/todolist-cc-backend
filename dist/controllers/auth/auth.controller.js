@@ -31,7 +31,7 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    login(body, req, res, next) {
+    login(body) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.authService.authenticateLocal(body.email, body.password);
         });
@@ -69,11 +69,8 @@ __decorate([
     swagger_1.Returns(auth_dto_1.AuthDto),
     typescript_param_validator_1.Validate(),
     __param(0, typescript_param_validator_1.Validator()), __param(0, common_1.BodyParams()),
-    __param(1, common_1.Request()),
-    __param(2, common_1.Response()),
-    __param(3, common_1.Next()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.LoginDto, Object, Object, Function]),
+    __metadata("design:paramtypes", [auth_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
